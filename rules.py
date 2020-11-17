@@ -14,7 +14,7 @@ def is_word(word_list, word):
     >>> is_word(word_list, 'asdf') returns
     False
     '''
-    
+
     word = word.lower()
-    word = word.strip(" !@#$%^&*()-_+={}[]|\:;'<>?,./\"")
+    word = word.strip(" !@#$%^&*()-_+={}[]|:;'<>?,./\"")
     return word in word_list
