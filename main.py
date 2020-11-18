@@ -1,3 +1,9 @@
+# Project Title  : E-Commerce Management System
+# Version        : 1.0 2020-2021
+# Developed By   : Arsh Malik, Rian Borah
+# Guide          : Mr. Mohitendra Dey
+# Last Updated On: <YYYY-MM-DD>
+
 '''
 Required Libraries
 '''
