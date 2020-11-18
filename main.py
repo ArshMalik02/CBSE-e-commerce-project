@@ -1,4 +1,21 @@
+'''
+Required Libraries
+'''
+import mysql.connector
+#install using python "-m pip install mysql-connector-python"
+
+import csv
+import math
+import random
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="yourusername",
+  password="yourpassword"
+)
+
 users = {"rian": "ilikecats", "arsh": "comeoncity"}
+#store users and password in sql instead?
 
 def createUser():
     '''
