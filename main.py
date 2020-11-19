@@ -12,13 +12,6 @@ import csv
 import math
 import random
 
-#store users and password in sql instead?
-
-with open('db/login/customer.csv', 'a', newline='') as cF:
-    cV = csv.writer(cF)
-    data =['Username','Password']
-    cV.writerow(data)
-
 def newCustomer():
     
     #Prompts new customer to create login details
