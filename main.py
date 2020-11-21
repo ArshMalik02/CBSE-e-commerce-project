@@ -13,7 +13,7 @@ import math
 import random
 
 def newCustomer():
-    
+
     #Prompts new customer to create login details
 
     with open('db/login/customer.csv','a', newline='') as cF:
@@ -31,10 +31,10 @@ def adminLogin():
     '''
     with open('db/login/admin.csv','r') as cF:
         cV = csv.reader(cF)
-        flag = 0 
+        flag = 0
         username = input('admin username: ')
         password = input('admin password: ')
-        for i in cV:                    
+        for i in cV:
             if username==i[0] and password == i[1]:
                 flag = 1
                 break
@@ -52,10 +52,10 @@ def customerLogin():
     '''
     with open('db/login/customer.csv','r') as cF:
         cV = csv.reader(cF)
-        flag = 0 
+        flag = 0
         username = input('Customer username: ')
         password = input('Customer password: ')
-        for i in cV:                    
+        for i in cV:
             if username==i[0] and password == i[1]:
                 flag = 1
                 break
@@ -64,13 +64,23 @@ def customerLogin():
         else:
             return False
 
+def addItem():
+    '''
+    '''
+    with open('db/stock/stockItems.csv','a', newline='') as cF:
+        cV = csv.writer(cF)
+        code = input("Item Code: ")
+        name = input("Item Name: ")
+        price = input("Price: ")
+        category = input(":Category: ")
+        cV.writerow([code,name,price,category])
 
 # DRIVER CODE STARTS FROM HERE
 
 while True:
     user = input('A:Admin, C:Customer, Q:Quit ')
     if user.upper() == 'A':
-        
+
         if adminLogin():
             print('Login successful. Welcome!')
             # After this admin can do stuff with stockItems.csv if entire new item added
@@ -95,8 +105,9 @@ while True:
         else:
             print('Wrong option!')
     elif user.upper()=='Q':
-        break 
-    
-    else:
-        print('Wrong option!')      
+        break
 
+    else:
+        print('Wrong option!')
+
+addItem()
