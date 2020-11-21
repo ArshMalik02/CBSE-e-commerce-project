@@ -32,8 +32,8 @@ def adminLogin():
     with open('db/login/admin.csv','r') as cF:
         cV = csv.reader(cF)
         flag = 0
-        username = input('admin username: ')
-        password = input('admin password: ')
+        username = input('Admin Username: ')
+        password = input('Admin Password: ')
         for i in cV:
             if username==i[0] and password == i[1]:
                 flag = 1
