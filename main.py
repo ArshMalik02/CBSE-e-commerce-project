@@ -63,30 +63,75 @@ def customerLogin():
             return True
         else:
             return False
+def adminStock():
+    while True:
+        print('What would you like to do?')
+        adminEdit = input('V:View Stock Items \t A:Add Stock Items \t R:Remove Stock Items \t Q:Quit \n>>')
+        if adminEdit == 'Q':
+            break
+        elif adminEdit == 'A':
+            addItem()
+        #elif adminEdit == 'R':
+        #    adminCurrentStock()
+
+def adminCurrentStock():
+    while True:
+        print('What would you like to do?')
+        adminEdit = input('I:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t Q:Quit')
+        if adminEdit == 'Q':
+            break
+        elif adminEdit == 'I':
+            adminStock()
+        elif adminEdit == 'C':
+            adminCurrentStock()
 
 def addItem():
     '''
+    Adds item to stockItems with details
+
+    Example:
+    >> Item Code: PEPSI150
+    >> Item Name: PEPSICOLA 150ML
+    >> Price($): 15
+    >> Category: FOOD AND DRINK
+
+    "PEPSI150,PEPSICOLA 150ML,15,FOOD AND DRINK" added to csv file
     '''
     with open('db/stock/stockItems.csv','a', newline='') as cF:
         cV = csv.writer(cF)
         code = input("Item Code: ")
         name = input("Item Name: ")
-        price = input("Price: ")
-        category = input(":Category: ")
+        price = input("Price($): ")
+        category = input("Category: ")
         cV.writerow([code,name,price,category])
 
-# DRIVER CODE STARTS FROM HERE
+def adminScreen():
+    '''
+    Interface for admin to interact with stockItemsand currentStock
+    '''
+    while True:
+        print('What would you like to do?')
+        adminEdit = input('I:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t Q:Quit \n>>')
+        if adminEdit == 'Q':
+            break
+        elif adminEdit == 'I':
+            adminStock()
+        elif adminEdit == 'C':
+            adminCurrentStock()
 
+# DRIVER CODE STARTS FROM HERE
 while True:
-    user = input('A:Admin, C:Customer, Q:Quit ')
+    user = input('A:Admin \t C:Customer \t Q:Quit \n>>')
     if user.upper() == 'A':
 
         if adminLogin():
             print('Login successful. Welcome!')
             # After this admin can do stuff with stockItems.csv if entire new item added
             # update currentStock.csv if quantity of existing item added
+            adminScreen()
+
         else:
-            print('Incorrect Username or Password')
+            print('Incorrect Username or Password\n')
 
     elif user.upper() == 'C':
         status = input('Login or Sign up ? ')
@@ -109,5 +154,3 @@ while True:
 
     else:
         print('Wrong option!')
-
-addItem()
