@@ -12,6 +12,25 @@ import csv
 import math
 import random
 
+def removeStockitems():
+    with open('db/stock/stockItems.csv','r+',newline='') as cF:
+        cR = csv.reader(cF)
+        itemId = input('ID of item to remove \n>>')
+        #flag = 0
+        for i in cR:
+            if itemId == i[0]:
+                flag = 1
+                print('Item found...\n removing...')
+                # Complete this function
+
+def viewStockitems():
+    # Allows user to view all items in stockItems.csv
+    
+    with open('db/stock/stockItems.csv','r') as cF:
+        cV = csv.reader(cF)
+        for i in cV:
+            print(i)
+            
 def newCustomer():
 
     #Prompts new customer to create login details
@@ -67,10 +86,12 @@ def adminStock():
     while True:
         print('What would you like to do?')
         adminEdit = input('V:View Stock Items \t A:Add Stock Items \t R:Remove Stock Items \t Q:Quit \n>>')
-        if adminEdit == 'Q':
+        if adminEdit.upper() == 'Q':
             break
-        elif adminEdit == 'A':
+        elif adminEdit.upper() == 'A':
             addItem()
+        elif adminEdit.upper() == 'V':
+            viewStockitems()
         #elif adminEdit == 'R':
         #    adminCurrentStock()
 
@@ -106,17 +127,17 @@ def addItem():
         cV.writerow([code,name,price,category])
 
 def adminScreen():
-    '''
-    Interface for admin to interact with stockItemsand currentStock
-    '''
+    
+    #Interface for admin to interact with stockItems and currentStock
+    
     while True:
         print('What would you like to do?')
         adminEdit = input('I:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t Q:Quit \n>>')
-        if adminEdit == 'Q':
+        if adminEdit.upper() == 'Q':
             break
-        elif adminEdit == 'I':
+        elif adminEdit.upper() == 'I':
             adminStock()
-        elif adminEdit == 'C':
+        elif adminEdit.upper() == 'C':
             adminCurrentStock()
 
 # DRIVER CODE STARTS FROM HERE
