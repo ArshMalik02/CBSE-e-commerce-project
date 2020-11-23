@@ -11,26 +11,37 @@ Required Libraries
 import csv
 import math
 import random
+import prettyfy
 
 def removeStockitems():
     with open('db/stock/stockItems.csv','r+',newline='') as cF:
         cR = csv.reader(cF)
         itemId = input('ID of item to remove \n>>')
-        #flag = 0
-        for i in cR:
-            if itemId == i[0]:
-                flag = 1
-                print('Item found...\n removing...')
-                # Complete this function
+        lines = list()
+        for row in cR:
+            if row[0] != itemId:
+                lines.append(row)
+    with open('db/stock/stockItems.csv','w+',newline='') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(lines)
+        print("Item deleted\n")
 
 def viewStockitems():
     # Allows user to view all items in stockItems.csv
-    
-    with open('db/stock/stockItems.csv','r') as cF:
+
+    f = open('db/stock/stockItems.csv','r')
+    csv_f = csv.reader(f)
+    for row in csv_f:
+        print('{:<15}  {:<40}  {:<20} {:<25}'.format(*row))
+
+    print()
+    #print(prettyfy.pretty_file('db/stock/stockItems.csv'))
+
+    '''with open('db/stock/stockItems.csv','r') as cF:
         cV = csv.reader(cF)
         for i in cV:
-            print(i)
-            
+            print(i)'''
+
 def newCustomer():
 
     #Prompts new customer to create login details
@@ -92,8 +103,8 @@ def adminStock():
             addItem()
         elif adminEdit.upper() == 'V':
             viewStockitems()
-        #elif adminEdit == 'R':
-        #    adminCurrentStock()
+        elif adminEdit == 'R':
+            removeStockitems()
 
 def adminCurrentStock():
     while True:
@@ -127,9 +138,9 @@ def addItem():
         cV.writerow([code,name,price,category])
 
 def adminScreen():
-    
+
     #Interface for admin to interact with stockItems and currentStock
-    
+
     while True:
         print('What would you like to do?')
         adminEdit = input('I:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t Q:Quit \n>>')
