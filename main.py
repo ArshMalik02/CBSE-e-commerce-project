@@ -51,7 +51,6 @@ def addtoCart():
                                 cartWrite.writerow([id,i[1],i[3],quantity])
                                 cart.close()
                                 print('Item added in cart...')
-
                                 break
             if flag == 0:
                 print('Item not found\n Would you like to view all items?')
@@ -59,10 +58,12 @@ def addtoCart():
                 if choice.upper() == 'Y':
                     viewStockitems()
                 else: break
-                           
 
-
-
+            prompt = input("Continue? Y/N: ")
+            if prompt == "N":
+                break
+            else:
+                continue
 
 #CUSTOMER CONTROLS END HERE
 
