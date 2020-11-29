@@ -91,7 +91,7 @@ def adminstockSort():
                         cR[j],cR[j+1]=cR[j+1],cR[j]
             for labels in x:
                 print('{:<15}  {:<40}  {:<20} {:<25}'.format(*labels))
-                break           
+                break
             for j in cR:
                 print('{:<15}  {:<40}  {:<20} {:<25}'.format(*j))
     except FileNotFoundError:
@@ -113,8 +113,8 @@ def admincurrentSearch():
                 break
         else:
             print('Item not found!')
-    
-    
+
+
 def adminstockSearch():
 
     # Admin search for specific item in Primary Stock record
@@ -298,6 +298,8 @@ def adminScreen():
             adminStock()
         elif adminEdit.upper() == 'C':
             adminCurrentStock()
+        elif adminEdit.upper() == 'S':
+            adminstockSearch()
 
 def customerScreen():
 
