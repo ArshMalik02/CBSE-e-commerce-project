@@ -18,6 +18,10 @@ import prettyfy
 #CUSTOMER CONTROLS START HERE
 
 def addtoCart():
+    cartFirst = open('db/shopping cart/cart.csv','w',newline='')
+    cartFirstWrite = csv.writer(cartFirst)
+    cartFirstWrite.writerow(["ITEM CODE","ITEM NAME","CATEGORY","QUANTITY"])
+    cartFirst.close()
     with open('db/stock/stockItems.csv','r') as cF:
         cR = csv.reader(cF)
         list_cR = list(cR)
@@ -27,13 +31,13 @@ def addtoCart():
             for i in list_cR:
                 if i[0] == id:
                     flag = 1
-                    quantity = input('Quantity of item you would like to purchase: ')
+                    quantity = int(input('Quantity of item you would like to purchase: '))
                     currentF = open('db/stock/currentStock.csv','r')
                     currentR = csv.reader(currentF)
                     L = list(currentR)
                     for c in L:
                         if id == c[0]:
-                            if quantity > c[2]:
+                            if quantity > int(c[2]):
                                 print('Not enough stock! Check back soon')
                                 break
                             else:
@@ -45,9 +49,8 @@ def addtoCart():
                                 with open('db/stock/currentStock.csv',"w",newline='') as curW:
                                     currentW = csv.writer(curW)
                                     currentW.writerows(L)
-                                cart = open('db/shopping cart/cart.csv','w',newline='')
+                                cart = open('db/shopping cart/cart.csv','a',newline='')
                                 cartWrite = csv.writer(cart)
-                                cartWrite.writerow(["ITEM CODE","ITEM NAME","CATEGORY","QUANTITY"])
                                 cartWrite.writerow([id,i[1],i[3],quantity])
                                 cart.close()
                                 print('Item added in cart...')
