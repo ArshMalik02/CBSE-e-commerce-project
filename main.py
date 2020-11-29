@@ -64,6 +64,14 @@ def addtoCart():
                 break
             else:
                 continue
+def createBill():
+    with open('db/shopping cart/cart.csv','r') as cF:
+        cV = csv.reader(cF)
+        f = open('db/shopping cart/bill.csv','w',newline='')
+        csv_f = csv.writer(f)
+        for row in cV:
+            csv_f.writerow(row)
+
 
 #CUSTOMER CONTROLS END HERE
 
@@ -314,7 +322,15 @@ def customerScreen():
             viewStockitems()
         elif custEdit.upper() == 'C':
             addtoCart()
+        elif custEdit.upper() == 'B':
+            createBill()
+            f = open('db/shopping cart/bill.csv','r')
+            csv_f = csv.reader(f)
+            for row in csv_f:
+                print('{:<15}  {:<20}  {:<10}'.format(*row))
+            print()
 
+            break
 # DRIVER CODE STARTS FROM HERE
 
 while True:
