@@ -2,7 +2,7 @@
 # Version        : 1.0 2020-2021
 # Developed By   : Arsh Malik, Rian Borah
 # Guide          : Mr. Mohitendra Dey
-# Last Updated On: <YYYY-MM-DD>
+# Last Updated On: 30 Nov 2020
 
 '''
 Required Libraries
