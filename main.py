@@ -75,6 +75,63 @@ def viewCurrentstock():
         print('{:<15}  {:<20}  {:<10}'.format(*row))
     print()
 
+# ADMIN CONTROLS START HERE:
+
+def adminstockSort():
+    # displaying Stock items sorted on Item Name
+    try:
+        with open('db/stock/stockItems.csv','r') as cF:
+            ct=csv.reader(cF)
+            x=list(ct)
+            cR=x[1:len(x)]
+            N=len(cR)
+            for i in range(N-1):
+                for j in range(N-i-1):
+                    if cR[j][1]>cR[j+1][1]:
+                        cR[j],cR[j+1]=cR[j+1],cR[j]
+            for labels in x:
+                print('{:<15}  {:<40}  {:<20} {:<25}'.format(*labels))
+                break           
+            for j in cR:
+                print('{:<15}  {:<40}  {:<20} {:<25}'.format(*j))
+    except FileNotFoundError:
+        print('file not found')
+
+def admincurrentSearch():
+
+    # Admin search for specific item in Current Stock
+    with open('db/stock/currentStock.csv','r') as cF:
+        cR = csv.reader(cF)
+        id = input('ID of item to search: ')
+        list_cR = list(cR)
+        Labels = list_cR[0]
+        for i in list_cR:
+            if id == i[0]:
+                print('Item found...')
+                print('{:<15}  {:<20}  {:<10}'.format(*Labels))
+                print('{:<15}  {:<20}  {:<10}'.format(*i))
+                break
+        else:
+            print('Item not found!')
+    
+    
+def adminstockSearch():
+
+    # Admin search for specific item in Primary Stock record
+    with open('db/stock/stockItems.csv','r') as cF:
+        cR = csv.reader(cF)
+        list_cR = list(cR)
+        Labels = list_cR[0]
+        id = input('ID of item to search: ')
+        for i in list_cR:
+            if i[0] == id:
+                print('Item found...')
+                print('{:<15} {:<30} {:<20} {:<25}'.format(*Labels))
+                print('{:<15} {:<30} {:<20} {:<25}'.format(*i))
+                break
+        else:
+            print('Item not found!')
+
 def adminCurrentedit():
     #Allow user to make changes to current stock of items
 
@@ -175,26 +232,32 @@ def customerLogin():
 def adminStock():
     while True:
         print('What would you like to do?')
-        adminEdit = input('V:View Stock Items \t A:Add Stock Items \t R:Remove Stock Items \t Q:Quit \n>>')
+        adminEdit = input('V:View Stock Items \t S:Search Item \t A:Add Stock Items \t R:Remove Stock Items \t T:Sorted Stock items \t Q:Quit \n>>')
         if adminEdit.upper() == 'Q':
             break
         elif adminEdit.upper() == 'A':
             addItem()
         elif adminEdit.upper() == 'V':
             viewStockitems()
-        elif adminEdit == 'R':
+        elif adminEdit.upper() == 'S':
+            adminstockSearch()
+        elif adminEdit.upper() == 'R':
             removeStockitems()
+        elif adminEdit.upper() == 'T':
+            adminstockSort()
 
 def adminCurrentStock():
     while True:
         print('What would you like to do with current stock?')
-        adminEdit = input('I:Edit Current Stock of Items \t C:View Current Stock Inventory \t Q:Quit\n>>')
+        adminEdit = input('I:Edit Current Stock of Items \t C:View Current Stock Inventory \t S:Search Item \t Q:Quit\n>>')
         if adminEdit.upper() == 'Q':
             break
         elif adminEdit.upper() == 'I':
             adminCurrentedit()
         elif adminEdit.upper() == 'C':
             viewCurrentstock()
+        elif adminEdit.upper() == 'S':
+            admincurrentSearch()
 
 def addItem():
     '''
@@ -228,7 +291,7 @@ def adminScreen():
 
     while True:
         print('What would you like to do?')
-        adminEdit = input('I:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t Q:Log out \n>>')
+        adminEdit = input('I:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t S:Search stock \t Q:Log out \n>>')
         if adminEdit.upper() == 'Q':
             break
         elif adminEdit.upper() == 'I':
@@ -266,8 +329,8 @@ while True:
             print('Incorrect Username or Password\n')
 
     elif user.upper() == 'C':
-        status = input('Login or Sign up ? ')
-        if status.upper() == 'LOGIN':
+        status = input('L:Login  S:Sign up \n>>')
+        if status.upper() == 'L':
 
             if customerLogin():
                 print('Login successful. Welcome!')
@@ -278,10 +341,11 @@ while True:
             else:
                 print('Incorrect Username or Password')
 
-        elif status.upper() == 'SIGN UP':
+        elif status.upper() == 'S':
             newCustomer()
         else:
             print('Wrong option!')
+
     elif user.upper()=='Q':
         break
 
