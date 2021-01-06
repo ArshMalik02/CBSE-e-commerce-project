@@ -7,7 +7,6 @@
 '''
 Required Libraries
 Using camelCase
-
 '''
 
 import csv
@@ -20,7 +19,7 @@ import prettyfy
 def addtoCart():
     cartFirst = open('db/shopping cart/cart.csv','w',newline='')
     cartFirstWrite = csv.writer(cartFirst)
-    cartFirstWrite.writerow(["ITEM CODE","ITEM NAME","CATEGORY","QUANTITY"])
+    cartFirstWrite.writerow(["ITEM CODE","ITEM NAME","CATEGORY","QUANTITY","COST"])
     cartFirst.close()
     with open('db/stock/stockItems.csv','r') as cF:
         cR = csv.reader(cF)
@@ -51,7 +50,8 @@ def addtoCart():
                                     currentW.writerows(L)
                                 cart = open('db/shopping cart/cart.csv','a',newline='')
                                 cartWrite = csv.writer(cart)
-                                cartWrite.writerow([id,i[1],i[3],quantity])
+                                cost = int(i[2])*custQt
+                                cartWrite.writerow([id,i[1],i[3],quantity,str(cost)])
                                 cart.close()
                                 print('Item added in cart...')
                                 break
@@ -70,10 +70,19 @@ def addtoCart():
 def createBill():
     with open('db/shopping cart/cart.csv','r') as cF:
         cV = csv.reader(cF)
+        listcV = list(cV)
         f = open('db/shopping cart/bill.csv','w',newline='')
         csv_f = csv.writer(f)
-        for row in cV:
+        totalCost=0
+        firstRow = listcV[0]
+        csv_f.writerow(firstRow)
+        for row in listcV[1:]:
+            x = int(row[4])
+            totalCost+=x
             csv_f.writerow(row)
+        tc= 'Total cost: $'+ str(totalCost)
+        csv_f.writerows([['','','','',''],[tc,'','','','']])
+        f.close()
 
 
 #CUSTOMER CONTROLS END HERE
@@ -83,7 +92,7 @@ def viewCurrentstock():
     f = open('db/stock/currentStock.csv','r')
     csv_f = csv.reader(f)
     for row in csv_f:
-        print('{:<15}  {:<20}  {:<10}'.format(*row))
+        print('{:<15}  {:<25}  {:<10}'.format(*row))
     print()
 
 # ADMIN CONTROLS START HERE:
@@ -330,10 +339,12 @@ def customerScreen():
             f = open('db/shopping cart/bill.csv','r')
             csv_f = csv.reader(f)
             for row in csv_f:
-                print('{:<15}  {:<20}  {:<10}'.format(*row))
+                print('{:<15}  {:<20}  {:<15}  {:<10}  {:<10}'.format(*row))
             print()
+            print
 
             break
+        
 # DRIVER CODE STARTS FROM HERE
 
 while True:
