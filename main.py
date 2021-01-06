@@ -10,8 +10,6 @@ Using camelCase
 '''
 
 import csv
-import math
-import random
 
 #CUSTOMER CONTROLS START HERE
 
