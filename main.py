@@ -2,13 +2,12 @@
 # Version        : 1.0 2020-2021
 # Developed By   : Arsh Malik, Rian Borah
 # Guide          : Mr. Mohitendra Dey
-# Last Updated On: 30 Nov 2020
+# Last Updated On: 06 Jan 2021
 
 '''
 Required Libraries
 Using camelCase
 '''
-
 import csv
 
 #CUSTOMER CONTROLS START HERE
@@ -335,9 +334,8 @@ def customerScreen():
             f = open('db/shopping cart/bill.csv','r')
             csv_f = csv.reader(f)
             for row in csv_f:
-                print('{:<15}  {:<20}  {:<15}  {:<10}  {:<10}'.format(*row))
+                print('{:<15}  {:<25}  {:<15}  {:<10}  {:<10}'.format(*row))
             print()
-            print
 
             break
 
