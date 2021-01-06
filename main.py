@@ -12,7 +12,6 @@ Using camelCase
 import csv
 import math
 import random
-import prettyfy
 
 #CUSTOMER CONTROLS START HERE
 
@@ -195,7 +194,6 @@ def viewStockitems():
         print('{:<15}  {:<40}  {:<20} {:<25}'.format(*row))
 
     print()
-    #print(prettyfy.pretty_file('db/stock/stockItems.csv'))
 
 
 def newCustomer():
