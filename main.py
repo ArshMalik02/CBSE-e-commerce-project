@@ -269,12 +269,12 @@ def adminStock():
 def adminCurrentStock():
     while True:
         print('What would you like to do with current stock?')
-        adminEdit = input('I:Edit Current Stock of Items \t C:View Current Stock Inventory \t S:Search Item \t Q:Quit\n>>')
+        adminEdit = input('E:Edit Current Stock of Items \t V:View Current Stock Inventory \t S:Search Item \t Q:Quit\n>>')
         if adminEdit.upper() == 'Q':
             break
-        elif adminEdit.upper() == 'I':
+        elif adminEdit.upper() == 'E':
             adminCurrentedit()
-        elif adminEdit.upper() == 'C':
+        elif adminEdit.upper() == 'V':
             viewCurrentstock()
         elif adminEdit.upper() == 'S':
             admincurrentSearch()
@@ -311,10 +311,10 @@ def adminScreen():
 
     while True:
         print('What would you like to do?')
-        adminEdit = input('I:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t S:Search stock \t Q:Log out \n>>')
+        adminEdit = input('V:View/Edit Stock Items \t C:View/Edit Current Stock Inventory \t S:Search stock \t Q:Log out \n>>')
         if adminEdit.upper() == 'Q':
             break
-        elif adminEdit.upper() == 'I':
+        elif adminEdit.upper() == 'V':
             adminStock()
         elif adminEdit.upper() == 'C':
             adminCurrentStock()
@@ -327,14 +327,14 @@ def customerScreen():
 
     while True:
         print('Greetings! What would you like to do?')
-        custEdit = input('V:View all Items in stock \t C:Add items to Cart \t B:Check out \t Q:Log Out \n>>')
+        custEdit = input('V:View all Items in stock \t A:Add items to Cart \t C:Check out \t Q:Log Out \n>>')
         if custEdit.upper() == 'Q':
             break
         elif custEdit.upper() == 'V':
             viewStockitems()
-        elif custEdit.upper() == 'C':
+        elif custEdit.upper() == 'A':
             addtoCart()
-        elif custEdit.upper() == 'B':
+        elif custEdit.upper() == 'C':
             createBill()
             f = open('db/shopping cart/bill.csv','r')
             csv_f = csv.reader(f)
@@ -344,7 +344,7 @@ def customerScreen():
             print
 
             break
-        
+
 # DRIVER CODE STARTS FROM HERE
 
 while True:
