@@ -1,3 +1,3 @@
 # CBSE-e-commerce-project
 
-e-commerce project based on python needed for CBSE grade 12 submission
+e-commerce project based on python for CBSE grade 12 submission
